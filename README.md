@@ -3,14 +3,13 @@
 Capture a room on iPhone, then reconstruct and inspect it in a local dashboard.
 Includes a native Swift capture app and a reproducible desktop entry point.
 
-**0.3.0 is a source release for self-signing.** A public TestFlight build is not
-available yet. Follow [Install on your iPhone](docs/self-signing.md).
+**Install by self-signing with your own Apple Account.**
+Follow [Install on your iPhone](docs/self-signing.md).
 
 ## What you need
 
-- iPhone 17 Pro or 18 Pro with Main + Ultra Wide + LiDAR. 17 Pro short captures
-  are tested; 18 Pro compatibility is checked at runtime and is not physically
-  validated yet. Capture requests both RGB streams at **1080p60**, depth up to
+- iPhone 17 Pro with Main + Ultra Wide + LiDAR. Short captures are tested.
+  Capture requests both RGB streams at **1080p60**, depth up to
   **30 fps**, and IMU at **100 Hz**. Longer-run thermal endurance is unverified.
 - A Mac, Xcode supporting your phone's iOS, and an Apple Account for self-signing.
 - Python 3.12 through uv, FFmpeg, CMake and RTAB-Map for processing.

@@ -2,16 +2,16 @@
 
 You can install Scene Capture on your own iPhone from source using Xcode and
 your Apple Account. A prebuilt, unsigned `.ipa` from GitHub cannot be installed
-directly on an ordinary iPhone. The source download is the supported route for
-this release; there is no published TestFlight build yet.
+directly on an ordinary iPhone. Build and sign the source with your own Apple
+Account using the steps below.
 
 ## Before you start
 
 - A Mac with Xcode that supports your phone's installed iOS version. Open Xcode
   once and finish its first-run setup and iOS platform installation.
-- An iPhone 17 Pro or 18 Pro, a USB data cable and your own Apple Account.
-  17 Pro short captures have been tested. 18 Pro must pass the app's runtime
-  MultiCam/LiDAR/rate checks; physical validation is pending.
+- An iPhone 17 Pro, a USB data cable and your own Apple Account.
+  Short captures have been tested; the app verifies the required camera,
+  LiDAR and frame-rate capabilities before recording.
 - At least 10 GB free on the phone for longer tests. Start with a 15-second clip.
 
 ## 1. Download and open the source
@@ -92,14 +92,6 @@ to inspect the exact commands. Credentials remain managed by Xcode.
 | Unsupported iOS version | Install Xcode/device support matching that iOS release. |
 | App stops launching after a week | Renew the Personal Team build with Xcode. |
 | Camera graph or rate check fails | Export the capability report; the exact 60/60/30 profile is not verified on that device. |
-
-## Distributing a ready-to-install build
-
-For a public TestFlight link, the maintainer needs an Apple Developer Program
-membership, an App Store Connect app record and a signed uploaded build, with
-Apple's beta distribution requirements completed. GitHub hosts the source and
-release notes; it does not replace Apple's provisioning.
-[Apple distribution guide](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases/).
 
 ## Documentation reference
 
