@@ -4,7 +4,6 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import hashlib
-import html
 import json
 import os
 from pathlib import Path
@@ -37,33 +36,9 @@ def check_paths(source, output):
 
 def write_dashboard(output, state):
     """Render only escaped local metadata; never serialize environment/API keys."""
-    output=Path(output);e=html.escape
-    links=[]
-    for path,label in [('map/viewer.html','Open 3D scene + timeline'),('mesh/room-mesh.ply','Download reconstructed mesh'),
-                       ('parsed/storyboard-main.jpg','Main camera storyboard'),('parsed/storyboard-ultra.jpg','Ultra Wide storyboard'),
-                       ('validation.json','Capture validation'),('review/review.json','Vision review + inventory'),('run.json','Processing record')]:
-        if (output/path).is_file():links.append(f'<a href="{path}">{e(label)}</a>')
-    items=''.join(f'<li>{e(x)}</li>'for x in state.get('limitations',[]))
-    page=f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scene Capture · recording dashboard</title><style>
-body{{background:#eeeee7;color:#283d33;font:16px/1.6 system-ui;max-width:1080px;margin:48px auto;padding:0 24px}}h1{{font-size:36px;letter-spacing:-1px}}nav{{display:flex;flex-wrap:wrap;gap:12px}}a{{color:#116552}}nav a{{padding:10px 14px;border:1px solid #aebeb1;text-decoration:none}}iframe{{width:100%;height:680px;border:1px solid #bdc8bd;margin:24px 0}}small{{color:#617063}}li{{margin:8px 0}}
-</style><h1>Your recording</h1><p>{e(state.get('recording_name','Session'))} · {e(state['status'])} · {e(state.get('stage',''))}</p><nav>{''.join(links)}</nav>'''
-    if (output/'map/viewer.html').is_file():page+='<iframe title="Reconstructed scene and timed capture" src="map/viewer.html"></iframe>'
-    review_file=output/'review/review.json'
-    if review_file.is_file():
-        result=json.loads(review_file.read_text()).get('review',{})
-        if not isinstance(result,dict):result={}
-        page+='<h2>Vision review</h2><p>'+e(str(result.get('summary','')))+'</p>'
-        for group in ['surfaces','objects']:
-            page+='<h3>'+group.capitalize()+' · proposals</h3><ul>'
-            entries=result.get(group,[])
-            for item in entries if isinstance(entries,list)else[]:
-                if isinstance(item,dict):page+='<li><strong>'+e(str(item.get('label','Unlabeled')))+':</strong> '+e(str(item.get('evidence','')))+' <small>'+e(str(item.get('uncertainty','')))+'</small></li>'
-            page+='</ul>'
-    page+='<h2>What this run contains</h2><ul>'+items+'</ul>'
-    if state.get('error'):page+='<p role="alert">'+e(state['error'])+'</p>'
-    page+='<small>Local reconstruction estimates. Camera rates and original timestamps are retained in capture reports. Visual review does not establish measured geometry or contact.</small></html>'
-    (output/'index.html').write_text(page)
+    from .ui import render_recording
+    output=Path(output)
+    (output/'index.html').write_text(render_recording(output,state))
 
 
 def finish_viewer(output):
@@ -76,6 +51,8 @@ def finish_viewer(output):
     scene_path=output/'map/scene.json';scene=json.loads(scene_path.read_text())
     scene['navigation']=json.loads((navigation/'navigation.json').read_text())
     save(scene_path,scene);write_map_ui(output/'map')
+    from .ui import polish_viewer
+    polish_viewer(output/'map/viewer.html')
 
 
 def run(source,output,*,fps=15,width=640,review_enabled=False,model=None,texture=False,prefix=None):

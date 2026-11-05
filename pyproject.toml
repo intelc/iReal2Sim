@@ -26,6 +26,6 @@ build-backend = "setuptools.build_meta"
 packages = ["pipeline"]
 
 [tool.setuptools.package-data]
-pipeline = ["*.html", "*.mjs", "rtabmap/*.cpp", "rtabmap/CMakeLists.txt"]
+pipeline = ["*.html", "*.mjs", "*.css", "rtabmap/*.cpp", "rtabmap/CMakeLists.txt"]
 
 

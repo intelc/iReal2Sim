@@ -64,7 +64,9 @@ def checked_tracks(document,stage,source_ids):
 
 
 def compose(root,state):
-    fingerprint=digest({'implementation':sha(__file__),'stages':{k:s.get('artifact_sha256',{})for k,s in state['stages'].items()if s['status']=='complete'}})
+    from .ui import polish_viewer
+    presentation={name:sha(Path(__file__).with_name(name))for name in('ui.py','viewer.css','viewer_ui.mjs')}
+    fingerprint=digest({'presentation':presentation,'implementation':sha(__file__),'stages':{k:s.get('artifact_sha256',{})for k,s in state['stages'].items()if s['status']=='complete'}})
     if state.get('viewer_fingerprint')==fingerprint and(root/state.get('viewer_path','')/'viewer.html').is_file():return
     parent=root/'viewer';parent.mkdir(exist_ok=True)
     output=parent/f'v{len(list(parent.glob("v*")))+1:03d}'
@@ -90,4 +92,5 @@ def compose(root,state):
         if text.count(old)!=1:raise ValueError('Actor display anchor changed; do not bypass the default quality gates.')
         page.write_text(text.replace(old,new))
     save(output/'scene.json',data)
+    polish_viewer(output/'viewer.html',back_url='../../index.html')
     state['viewer_path']=str(output.relative_to(root));state['viewer_fingerprint']=fingerprint

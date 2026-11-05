@@ -1,0 +1,13 @@
+const states={complete:['Complete','good'],needs_setup:['Setup needed','warn'],pending:['Not started',''],planned:['Ready to process',''],queued:['Queued',''],running:['Processing','running'],failed:['Needs attention','bad']};
+document.querySelectorAll('[data-copy]').forEach(button=>button.onclick=async()=>{try{await navigator.clipboard.writeText(button.dataset.copy);const old=button.textContent;button.textContent='Copied';setTimeout(()=>button.textContent=old,1800);}catch{button.textContent='Select and copy the prompt above';}});
+document.getElementById('reloadResults')?.addEventListener('click',()=>location.reload());
+let last='',inFlight=false;
+async function refresh(){if(inFlight)return;inFlight=true;try{const r=await fetch(document.body.dataset.stateSrc,{cache:'no-store'});if(!r.ok)return;const d=await r.json();const signature=JSON.stringify([d.status,d.stage,d.stages,d.viewer_path]);if(signature===last)return;last=signature;
+ const status=d.status,viewer=d.viewer_path||document.body.dataset.viewerPath;
+ document.querySelectorAll('[data-status-badge]').forEach(node=>{const [label,tone]=states[status]||['In progress',''];node.className='badge '+(status==='needs_setup'&&viewer?'good':tone);node.textContent=status==='needs_setup'&&viewer?'Scene ready':status==='complete'?'Ready to explore':label;});
+ if(d.stages){let count=0;for(const[name,stage]of Object.entries(d.stages)){if(stage.status==='complete')count++;const row=document.querySelector(`[data-stage="${CSS.escape(name)}"]`);if(row){row.querySelector('[data-stage-state]').textContent=(states[stage.status]||[stage.status])[0];const tone=(states[stage.status]||['',''])[1],mark=row.querySelector('.stage-mark');mark.className='stage-mark '+tone;mark.textContent=tone==='good'?'✓':['warn','bad'].includes(tone)?'!':'·';const detail=row.querySelector('[data-stage-needs]');if(detail)detail.textContent=(stage.needs||[]).join('; ');}}const n=document.getElementById('stageCount');if(n)n.textContent=`${count} of ${Object.keys(d.stages).length} complete`;}
+ const active=document.getElementById('activeStage');if(active)active.textContent=status==='complete'?'Ready':String(d.stage||'Preparing recording').replace(/^./,s=>s.toUpperCase());
+ if(d.viewer_path&&d.viewer_path!==document.body.dataset.viewerPath)document.getElementById('newResults').hidden=false;
+ if(!document.body.dataset.viewerPath&&status==='complete')document.getElementById('newResults').hidden=false;
+ }catch{/* Keep existing scene usable if the local server is briefly unavailable. */}finally{inFlight=false;}}
+const timer=setInterval(refresh,3000);window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});

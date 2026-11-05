@@ -11,10 +11,10 @@ import zipfile
 
 
 ROOTS=['release','release_server','agent_workflow','workflow_artifacts','export_rgbd','reconstruct','fuse_map','mesh_viewer','parse_recording','serve_viewer','astra_review','texture_atlas','map_replay']
-ASSETS=['viewer.html','release_setup.html','map_viewer.mjs','map_geometry.mjs','map_navigation.mjs']
+ASSETS=['dashboard.css','setup.mjs','ui_logic.mjs','dashboard_page.mjs','viewer.css','viewer_ui.mjs','viewer.html','release_setup.html','map_viewer.mjs','map_geometry.mjs','map_navigation.mjs']
 TOP=['README.md','LICENSE','THIRD_PARTY.md','AGENTS.md','CLAUDE.md','.gitignore','.env.example','pyproject.toml','uv.lock','project.yml','start']
 DOCS=['self-signing.md','release-workflow.md','session-format.md']
-TESTS=['test_validate_session.py','test_rgbd.py','test_reconstruction.py','test_parse_recording.py','test_gltf_material.py','test_viewer_server.py','test_release.py','test_release_server.py','test_release_previews.py','test_agent_workflow.py','test_workflow_artifacts.py','test_map_navigation.mjs','test_map_geometry.mjs']
+TESTS=['test_ui.py','test_ui_logic.mjs','test_validate_session.py','test_rgbd.py','test_reconstruction.py','test_parse_recording.py','test_gltf_material.py','test_viewer_server.py','test_release.py','test_release_server.py','test_release_previews.py','test_agent_workflow.py','test_workflow_artifacts.py','test_map_navigation.mjs','test_map_geometry.mjs']
 
 
 def import_closure(root,roots):

@@ -68,9 +68,12 @@ brew install uv ffmpeg cmake rtabmap
 
 The local setup page opens at `http://127.0.0.1:8766`. Enter the exported session
 folder. Optionally enter your OpenAI key and enable vision review; that uploads
-the Main/Ultra storyboards and incurs API usage. Click **Build dashboard**.
-The job list shows progress and links to your generated scene, camera replay,
-source storyboards, validation and optional recognition/review report.
+the Main/Ultra storyboards and incurs API usage. Click **Build scene**.
+Recordings appear first when you return. Search or rename them, open a ready
+scene, or choose **New reconstruction** to process another capture. Each scene
+workspace shows progress, source evidence and optional fitting setup separately.
+The viewer groups navigation, scene representation and display settings, with
+**Controls** for walking and keyboard help.
 
 The key remains in the local backend's memory/child environment and is not saved
 in the dashboard or iPhone app. Processing without API review works offline once

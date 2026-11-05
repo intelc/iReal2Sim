@@ -10,7 +10,6 @@ import contextlib
 from datetime import datetime, timezone
 import fcntl
 import hashlib
-import html
 import json
 import os
 from pathlib import Path
@@ -156,21 +155,8 @@ def write_state(root,state):
     save(root/'workflow.json',state)
     save(root/'run.json',{'schema':state['schema'],'status':state['status'],'recording_name':state['recording_name'],
                           'stage':', '.join(s+': '+r['status']for s,r in state['stages'].items())})
-    e=html.escape;rows=[];links=[]
-    viewer=state.get('viewer_path')
-    if viewer and(root/viewer/'viewer.html').is_file():links.append(f'<a href="{e(viewer)}/viewer.html">Open scene + actor replay</a>')
-    for name,stage in state['stages'].items():
-        note='; '.join(stage.get('needs',[]))
-        rows.append(f'<tr><td>{e(name)}</td><td>{e(stage["status"])}</td><td>{e(note)}</td></tr>')
-        attempt=stage.get('output')
-        if attempt and(root/attempt/'index.html').is_file():links.append(f'<a href="{e(attempt)}/index.html">{e(name)} dashboard</a>')
-        for item in stage.get('artifacts',[]):
-            links.append(f'<a href="{e(item["path"])}">{e(name+": "+item.get("role","artifact"))}</a>')
-    page='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>iReal2Sim · agent workflow</title><style>body{font:16px/1.6 system-ui;background:#eeeee8;color:#263d32;max-width:1100px;margin:45px auto;padding:0 24px}a{color:#12614b}nav{display:flex;gap:18px;flex-wrap:wrap}table{border-collapse:collapse;width:100%;margin:24px 0}td,th{text-align:left;border-bottom:1px solid #bcc9bb;padding:12px}iframe{width:100%;height:650px;border:1px solid #bcc9bb}</style>'''
-    page+=f'<h1>Agent workflow</h1><p>{e(state["recording_name"])} · {e(state["status"])}</p><nav>{"".join(links)}</nav><table><tr><th>Stage</th><th>State</th><th>Next action</th></tr>{"".join(rows)}</table>'
-    if viewer and(root/viewer/'viewer.html').is_file():page+=f'<iframe src="{e(viewer)}/viewer.html" title="Reconstruction and available estimates"></iframe>'
-    page+='<p>Scan and configured worker outputs are estimates. Fitting worker completion does not establish visual approval, physical contact or metric accuracy. Pending stages are retained for a later resume.</p></html>'
-    (root/'index.html').write_text(page)
+    from .ui import render_workflow
+    (root/'index.html').write_text(render_workflow(root,state))
 
 
 def fingerprints(root,paths):
