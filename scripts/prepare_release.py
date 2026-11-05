@@ -11,7 +11,7 @@ import zipfile
 
 
 ROOTS=['release','release_server','agent_workflow','workflow_artifacts','export_rgbd','reconstruct','fuse_map','mesh_viewer','parse_recording','serve_viewer','astra_review','texture_atlas','map_replay']
-WEBSITE=['index.html','site.css','site.mjs','demo_defaults.mjs','mark.svg','README.md']
+WEBSITE=['index.html','site.css','site.mjs','demo_defaults.mjs','demo_loading.html','demo_loading.css','demo_loading.js','mark.svg','README.md']
 ASSETS=['dashboard.css','setup.mjs','ui_logic.mjs','dashboard_page.mjs','viewer.css','viewer_ui.mjs','viewer.html','release_setup.html','map_viewer.mjs','map_geometry.mjs','map_navigation.mjs']
 TOP=['README.md','LICENSE','THIRD_PARTY.md','AGENTS.md','CLAUDE.md','.gitignore','.env.example','pyproject.toml','uv.lock','project.yml','start']
 DOCS=['self-signing.md','release-workflow.md','session-format.md']

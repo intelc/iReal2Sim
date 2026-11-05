@@ -1,0 +1,29 @@
+<section id="demoLoader" class="demo-loader" data-state="loading" aria-labelledby="demoLoadTitle">
+  <a class="demo-loader-home" href="/">← iReal2Sim</a>
+  <div class="demo-loader-content">
+    <svg class="demo-loader-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <path d="m32 5 24 14v27L32 60 8 46V19L32 5Z M8 19l24 14 24-14 M32 33v27 M20 12l24 14v14l-12 7-12-7V26l12-7"/>
+    </svg>
+    <div id="demoLoadStatus" role="status" aria-live="polite" aria-atomic="true">
+      <p class="demo-loader-eyebrow">iPhone capture → 3D scene</p>
+      <h2 id="demoLoadTitle">Loading the 3D demo</h2>
+      <p id="demoLoadDetail">Preparing the room model, captured surfaces and interactions.</p>
+    </div>
+    <div id="demoLoadProgress" class="demo-loader-progress" role="progressbar" aria-label="Scene preparation" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-valuetext="Starting the 3D demo">
+      <ol aria-hidden="true">
+        <li data-step="1" data-active>Model</li>
+        <li data-step="2">Interactions</li>
+        <li data-step="3">Capture</li>
+        <li data-step="4">Textures</li>
+      </ol>
+    </div>
+    <p id="demoLoadNote" class="demo-loader-note">The first visit may take a little longer.</p>
+    <p class="demo-loader-error" role="alert">The scene couldn’t load. Check your connection and reload the demo.</p>
+    <div class="demo-loader-actions">
+      <button id="demoLoadRetry" type="button" hidden>Reload demo</button>
+      <a href="/">Back to the project</a>
+    </div>
+    <noscript><p>This interactive demo needs JavaScript. Enable it and reload this page.</p></noscript>
+  </div>
+</section>
+<script src="../demo_loading.js" onerror="document.getElementById('demoLoader').dataset.state='error';document.getElementById('demoLoadTitle').textContent='The scene couldn’t load';document.getElementById('demoLoadRetry').hidden=false;document.getElementById('demoLoadRetry').onclick=function(){location.reload();}"></script>
