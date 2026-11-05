@@ -14,7 +14,7 @@ ROOTS=['release','release_server','export_rgbd','reconstruct','fuse_map','mesh_v
 ASSETS=['viewer.html','release_setup.html','map_viewer.mjs','map_geometry.mjs','map_navigation.mjs']
 TOP=['README.md','LICENSE','THIRD_PARTY.md','.gitignore','.env.example','pyproject.toml','uv.lock','project.yml','start']
 DOCS=['self-signing.md','release-workflow.md','session-format.md']
-TESTS=['test_validate_session.py','test_rgbd.py','test_reconstruction.py','test_parse_recording.py','test_gltf_material.py','test_viewer_server.py','test_release.py','test_release_server.py','test_map_navigation.mjs','test_map_geometry.mjs']
+TESTS=['test_validate_session.py','test_rgbd.py','test_reconstruction.py','test_parse_recording.py','test_gltf_material.py','test_viewer_server.py','test_release.py','test_release_server.py','test_release_previews.py','test_map_navigation.mjs','test_map_geometry.mjs']
 
 
 def import_closure(root,roots):

@@ -122,6 +122,9 @@ def run(source,output,*,fps=15,width=640,review_enabled=False,model=None,texture
         progress('3D replay dashboard')
         from .mesh_viewer import build_viewer
         build_viewer(output/'export',output/'mapping',output/'mesh/room-mesh.ply',output/'map',texture_bundle=atlas,timeline=True)
+        progress('paired Main and Ultra Wide replay')
+        from .release_previews import attach
+        attach(output)
         finish_viewer(output)
         # Keep the delivered dashboard independent of atlas symlinks.
         atlas_link=output/'map/atlas.png'

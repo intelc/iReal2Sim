@@ -50,7 +50,7 @@ without an API key. See [official image input documentation](https://developers.
 
 - `index.html`: dashboard with scene, downloads and status.
 - `map/viewer.html`: reconstructed room, recorded views, upright orbit, WASD/jump
-  and timed Main replay.
+  and timed Main/Ultra replay.
 - `parsed/`: all-stream indexes, depth audit and Main/Ultra storyboards.
 - `validation.json`, `run.json`: capture checks and processing provenance.
 - `mapping/`: retained RTAB-Map database, poses and logs.

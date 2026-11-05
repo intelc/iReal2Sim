@@ -58,7 +58,7 @@ dependencies are installed. No learned model download or NVIDIA GPU is required.
 
 The portable pipeline runs capture validation → both-camera indexing → calibrated
 Main/LiDAR RGB-D export → RTAB-Map pose estimation → Open3D fusion → 3D map and
-timed replay. Optional texture baking improves captured appearance. Optional
+paired Main/Ultra replay. Optional texture baking improves captured appearance. Optional
 vision review produces an object/surface inventory and capture-gap suggestions.
 
 This baseline does **not** automatically reproduce the hand-authored furnished
