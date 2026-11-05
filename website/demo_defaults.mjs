@@ -1,6 +1,11 @@
 // Called after the demo's original viewer initialization has completed.
 // These defaults change display state, preserving camera poses and actor gates.
 export async function applyDemoDefaults(sceneLayers) {
+  if (document.body.classList.contains('map-expanded')) {
+    document.getElementById('focusLayout')?.click();
+    // Refit the room after restoring the side-by-side camera previews.
+    document.getElementById('overview')?.click();
+  }
   for (const id of ['showPath', 'showFrustum', 'showSceneOutlines', 'showStructureOutlines', 'showItemOutlines']) {
     const control = document.getElementById(id);
     if (control) control.checked = true;
@@ -16,4 +21,5 @@ export async function applyDemoDefaults(sceneLayers) {
     document.getElementById('showOverlay')?.click();
   }
   document.body.dataset.defaultSceneView = 'overlay';
+  document.body.dataset.defaultCameraPreviews = 'visible';
 }

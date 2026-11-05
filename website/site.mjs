@@ -59,7 +59,8 @@ if ('IntersectionObserver' in window) {
       if (!entry.isIntersecting) continue;
       entrances.unobserve(entry.target);
       if (reduceMotion.matches) continue;
-      const image = entry.target.classList.contains('scene-preview');
+      // The phone preview spans the viewport; enter vertically to keep it within it.
+      const image = entry.target.classList.contains('scene-preview') && matchMedia('(min-width: 801px)').matches;
       entry.target.animate(image
         ? [{ opacity: .15, transform: 'translateX(24px) scale(1.025)' }, { opacity: 1, transform: 'none' }]
         : [{ opacity: .2, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }],

@@ -87,15 +87,15 @@
     "tests/test_viewer_server.py": "fea12641760d16ea15877b0a767aa89d581ccd47db38357ffa8a8ba7ac28aacb",
     "tests/test_workflow_artifacts.py": "fe644e261961acc020114b79b4cf5bdbae8c5bf69083187eeda66ed748273232",
     "uv.lock": "d37bcdebc0ac42b4a3c91617160249407df561ff9b07c2a9a94e0930816b9200",
-    "website/README.md": "ee2f791419e03a080ab513c7a4b46c43c8107c6ea626153ac5335adeebb2834d",
-    "website/demo_defaults.mjs": "b3f6a83a4e26a05972fc28cf5a6204d88fdeade651522cb568526d4a16c45fa5",
+    "website/README.md": "6f47876752755c1dfe3a22d501db99ed6ed3bb05878b1f4dddc97c5ef8d2dfad",
+    "website/demo_defaults.mjs": "994467c7b1d3e4542d233479abbe7255dc0569e81be2998c71a6f33c5a0d2a5c",
     "website/demo_loading.css": "36acef926d8428c8a7672f10fb792a1baf24db7c1df9a8cfe72164d968c10f99",
     "website/demo_loading.html": "5d4208e64d62d8987fc9b4bfa59789c1fe7d20d5c63363dac84da0c1076d0993",
     "website/demo_loading.js": "5abb8cb04992313341f7983a7bce8a13757bf0b965d1343ede6ad2709eda5e13",
-    "website/index.html": "4b5cce111ac302c1140684bc4ccab0fb83546375e2ad7fbc36f0500a1d56aa0e",
+    "website/index.html": "a29b264527899952c79e12cc0d1ef2e193d5e17f87d3d45089241c0168c62e12",
     "website/mark.svg": "4e36e8981a03d2ee1a31114f6f4b3b1084f5afdaf111d3eab2f726c15d53af04",
-    "website/site.css": "ccf7ea3157d97b7ca1b057fc4ea3ea6ad113f8779b19d6cbde9609747f5b1110",
-    "website/site.mjs": "ac5cfcd11547f1a60e4ae8a13805907491efb630077307cbd5671024d5402243"
+    "website/site.css": "9bfa9ccc4cbb4ba8939ebf2009f4d65771706e5710619f288be1ea48d0e31444",
+    "website/site.mjs": "576a386d2f1d71355fece199f71be6b8d0b6d7f49c31549a74f06a092219fc49"
   },
   "portable_modules": [
     "agent_workflow",
