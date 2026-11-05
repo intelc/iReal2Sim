@@ -1,0 +1,4 @@
+interface:
+  display_name: "iReal2Sim"
+  short_description: "Guide capture, reconstruction and reviewed scene fitting"
+  default_prompt: "Use $ireal2sim to process my iPhone recording and guide me through the available scene and hand stages."

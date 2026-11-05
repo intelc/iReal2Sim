@@ -145,6 +145,9 @@ def run(source,output,*,fps=15,width=640,review_enabled=False,model=None,texture
 
 
 def main():
+    if len(sys.argv)>1 and sys.argv[1]=='workflow':
+        from .agent_workflow import main as workflow_main
+        raise SystemExit(workflow_main(sys.argv[2:]))
     p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='command',required=True)
     sub.add_parser('doctor',help='Check desktop dependencies without calling an API')
     s=sub.add_parser('serve',help='Open the local setup and processing dashboard');s.add_argument('--workspace',type=Path,default=Path('workspaces'));s.add_argument('--port',type=int,default=8766);s.add_argument('--no-open',action='store_true')

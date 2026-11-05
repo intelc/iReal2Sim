@@ -16,4 +16,5 @@ dist/
 .release/
 *.egg-info/
 .pytest_cache/
+ireal2sim.local.json
 

@@ -10,11 +10,11 @@ import shutil
 import zipfile
 
 
-ROOTS=['release','release_server','export_rgbd','reconstruct','fuse_map','mesh_viewer','parse_recording','serve_viewer','astra_review','texture_atlas','map_replay']
+ROOTS=['release','release_server','agent_workflow','workflow_artifacts','export_rgbd','reconstruct','fuse_map','mesh_viewer','parse_recording','serve_viewer','astra_review','texture_atlas','map_replay']
 ASSETS=['viewer.html','release_setup.html','map_viewer.mjs','map_geometry.mjs','map_navigation.mjs']
-TOP=['README.md','LICENSE','THIRD_PARTY.md','.gitignore','.env.example','pyproject.toml','uv.lock','project.yml','start']
+TOP=['README.md','LICENSE','THIRD_PARTY.md','AGENTS.md','CLAUDE.md','.gitignore','.env.example','pyproject.toml','uv.lock','project.yml','start']
 DOCS=['self-signing.md','release-workflow.md','session-format.md']
-TESTS=['test_validate_session.py','test_rgbd.py','test_reconstruction.py','test_parse_recording.py','test_gltf_material.py','test_viewer_server.py','test_release.py','test_release_server.py','test_release_previews.py','test_map_navigation.mjs','test_map_geometry.mjs']
+TESTS=['test_validate_session.py','test_rgbd.py','test_reconstruction.py','test_parse_recording.py','test_gltf_material.py','test_viewer_server.py','test_release.py','test_release_server.py','test_release_previews.py','test_agent_workflow.py','test_workflow_artifacts.py','test_map_navigation.mjs','test_map_geometry.mjs']
 
 
 def import_closure(root,roots):
@@ -40,6 +40,7 @@ def prepare(root,output):
     files+=[Path('docs')/x for x in DOCS]+[Path('tests')/x for x in TESTS]
     files+=[Path('tests/ios/RecordingTests.swift')]
     files+=[Path('scripts/install_iphone.py'),Path('scripts/prepare_release.py'),Path('.github/workflows/ci.yml')]
+    files +=[p.relative_to(root)for p in(root/'.agents/skills/ireal2sim').rglob('*')if p.is_file()and'__pycache__'not in p.parts]
     for folder in ['app','SceneCapture.xcodeproj']:
         files +=[p.relative_to(root)for p in (root/folder).rglob('*')if p.is_file()and'xcuserdata'not in p.parts and p.name!='.DS_Store']
     # Read/validate every file before creating a staging tree.

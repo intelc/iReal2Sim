@@ -15,6 +15,29 @@ Follow [Install on your iPhone](docs/self-signing.md).
 - Python 3.12 through uv, FFmpeg, CMake and RTAB-Map for processing.
 - Optional OpenAI API key for vision review and object/surface recognition.
 
+## Use an interactive agent
+
+Open this folder in Codex or another coding agent and ask:
+
+> Process my iPhone recording, check the required credentials, and build the scene dashboard. Guide me through scene and hand fitting too.
+
+`AGENTS.md` points to the repo-local `$ireal2sim` skill. It inspects setup without
+printing keys, asks only for missing inputs, runs ready stages and records
+progress for another chat to resume. Scan/review run automatically. Scene,
+hand and object fitting use explicitly configured workers; the agent helps with
+their setup and keeps unavailable stages pending rather than claiming success.
+
+```sh
+python3 -m pipeline.agent_workflow doctor --profile full
+uv run scene-capture workflow plan /path/to/session --output workspaces/my-room --profile full
+uv run scene-capture workflow run workspaces/my-room
+```
+
+Repeat the last command to resume without rerunning valid completed stages.
+Credentials stay in the environment or gitignored `.env`. See
+[the skill](.agents/skills/ireal2sim/SKILL.md) for credential routing, worker
+contracts and verification. You can also use the manual path below.
+
 ## 1. Install the capture app
 
 Download this repository and open `SceneCapture.xcodeproj`. Select your Apple

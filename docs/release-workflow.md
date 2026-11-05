@@ -29,6 +29,37 @@ capture is not assumed to share any calibration or room parameters with the demo
 
 ## Command line
 
+For an interactive coding agent, `AGENTS.md` routes to the repo-local
+`.agents/skills/ireal2sim` skill. The standard-library doctor inspects credentials
+without printing values or making billable calls:
+
+```sh
+python3 -m pipeline.agent_workflow doctor --profile full
+uv run scene-capture workflow plan /path/to/session --output workspaces/my-room --profile full
+uv run scene-capture workflow run workspaces/my-room
+uv run scene-capture workflow status workspaces/my-room
+```
+
+Profiles are `scan`, `review` and `full`. The same run command resumes a plan;
+whole completed stages are reused only when source/input/output hashes match.
+Failed attempts are retained. Missing optional setup returns exit code 2 and
+keeps actionable `needs_setup` entries while independent stages complete.
+The default workflow includes texture baking; `plan --no-texture` disables it.
+Original videos are not modified. Runtime state stays under `workspaces/`.
+
+Scan and API capture review are built in. Full modeling, hands and handled
+objects use explicit worker adapters in gitignored `ireal2sim.local.json`.
+The [worker contract](../.agents/skills/ireal2sim/references/advanced-stages.md)
+binds outputs to source/calibration/trajectory hashes and checks geometry/frame
+identity before viewer composition. Models gain a scan/model selector; actor
+tracks retain weak filtering and exact source IDs. Worker completion is not
+visual approval. New GPU rentals are never provisioned by this runner.
+
+The interactive agent handles missing physical inputs and credentials using the
+[credential routing guide](../.agents/skills/ireal2sim/references/credentials.md).
+No global Codex configuration or skill installation is necessary for a source
+checkout; other agents can read the same Markdown guidance.
+
 ```sh
 uv sync --frozen --python 3.12
 uv run scene-capture doctor
