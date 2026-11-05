@@ -1,0 +1,31 @@
+[project]
+name = "iphone-rsa-pipeline"
+version = "0.3.0"
+description = "Calibrated offline processing of chest-mounted iPhone RGB-D recordings"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "numpy>=1.26,<3",
+  "scipy>=1.11,<2",
+  "opencv-python-headless>=4.10,<5",
+  "matplotlib>=3.8,<4",
+  "pillow>=10,<13",
+  "open3d>=0.19,<0.20",
+  "trimesh>=4.5,<5",
+  "networkx>=3.2,<4",
+  "requests>=2.32,<3",
+]
+
+[project.scripts]
+scene-capture = "pipeline.release:main"
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["pipeline"]
+
+[tool.setuptools.package-data]
+pipeline = ["*.html", "*.mjs", "rtabmap/*.cpp", "rtabmap/CMakeLists.txt"]
+
+

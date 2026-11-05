@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")"
+if ! command -v uv >/dev/null 2>&1; then
+  echo 'Install uv first: https://docs.astral.sh/uv/getting-started/installation/' >&2
+  exit 1
+fi
+uv sync --frozen --python 3.12
+exec uv run --frozen scene-capture serve "$@"

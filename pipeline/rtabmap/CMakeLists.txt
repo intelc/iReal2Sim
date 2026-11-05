@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(iphone_rsa_mapper LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+find_package(RTABMap REQUIRED COMPONENTS core)
+find_package(OpenCV REQUIRED COMPONENTS core imgcodecs)
+add_executable(iphone-rsa-map main.cpp)
+target_include_directories(iphone-rsa-map PRIVATE ${RTABMap_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
+target_link_libraries(iphone-rsa-map PRIVATE ${RTABMap_LIBRARIES} ${OpenCV_LIBS})

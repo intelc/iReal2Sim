@@ -1,0 +1,22 @@
+name: Checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  python-and-viewer:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: brew install ffmpeg
+      - run: uv sync --frozen --python 3.12
+      - run: uv run python -m unittest discover -s tests -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/*.mjs
+  iphone-build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: xcodebuild -project SceneCapture.xcodeproj -scheme SceneCapture -destination 'generic/platform=iOS' -derivedDataPath build/ci CODE_SIGNING_ALLOWED=NO build
