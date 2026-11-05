@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Capture a room with an iPhone 17 Pro. Reconstruct, inspect and refine it on your Mac with an agent-guided pipeline. Explore the iReal2Sim 3D demo and get started from source.">
+  <meta property="og:title" content="iReal2Sim — Your room, reconstructed">
+  <meta property="og:description" content="iPhone RGB-D capture, an agent-guided local pipeline, and an interactive scene you can inspect against the original recording.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ireal2sim.intelchen.com/">
+  <meta property="og:image" content="https://ireal2sim.intelchen.com/media/room-overlay.png">
+  <meta name="theme-color" content="#176f62">
+  <title>iReal2Sim — Your room, reconstructed</title>
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/site.css">
+  <script type="module" src="/site.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header wrap">
+  <a class="wordmark" href="/" aria-label="iReal2Sim home"><img src="/mark.svg" width="29" height="31" alt="">iReal2Sim</a>
+  <nav aria-label="Main navigation">
+    <a href="/demo/">Demo</a><a href="#install">Install</a><a href="#agent">Agent</a><a href="https://github.com/intelc/iReal2Sim" data-github>GitHub</a>
+  </nav>
+</header>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="heroTitle">
+    <div class="hero-copy">
+      <h1 id="heroTitle" data-reveal>Your room,<br>reconstructed</h1>
+      <p class="intro" data-reveal>Capture with an iPhone 17 Pro, then reconstruct and inspect a room on your Mac with an agent.</p>
+      <div class="hero-actions" data-reveal><a class="button primary" href="/demo/">Open 3D demo <span aria-hidden="true">↗</span></a><a class="text-link" href="/downloads/iReal2Sim-0.3.0-source.zip">Download source</a></div>
+      <p class="hero-caption" data-reveal>Two cameras. LiDAR. One source-linked scene.</p>
+    </div>
+    <div class="scene-preview" data-ui data-reveal>
+      <figure class="preview-media">
+        <img id="roomPreview" src="/media/room-overlay.png" width="1232" height="445" alt="Teal modeled walls, kitchen island and furniture aligned over the captured 3D room, with its camera path and frustum" fetchpriority="high">
+        <figcaption id="previewDescription" aria-live="polite">Overlay · compare the model with the captured reconstruction.</figcaption>
+      </figure>
+      <div class="preview-switch" role="group" aria-label="Scene preview layer">
+        <button type="button" data-mode="overlay" aria-pressed="true">Overlay</button>
+        <button type="button" data-mode="real" aria-pressed="false">Captured 3D</button>
+        <button type="button" data-mode="model" aria-pressed="false">3D model</button>
+        <a href="/demo/" class="preview-open" aria-label="Open the interactive 3D scene">Explore the scene</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="record-section section-space" id="recording" aria-labelledby="recordTitle">
+    <div class="wrap recording-layout">
+      <div class="record-copy">
+        <h2 id="recordTitle" data-reveal>Keep the recording<br>in view</h2>
+        <p data-reveal>Record Main and Ultra Wide imagery, LiDAR depth and device motion together. Replay the source footage alongside the scene to see what the reconstruction is based on.</p>
+        <dl class="capture-specs" data-reveal><div><dt>Main + Ultra Wide</dt><dd>1080p60 requested</dd></div><div><dt>LiDAR</dt><dd>Up to 30 fps</dd></div><div><dt>IMU</dt><dd>100 Hz</dd></div></dl>
+        <p class="support-note" data-reveal>Start with a short test on iPhone 17 Pro. Use a rigid chest mount, then slowly sweep the floor, walls and upper surfaces before recording an interaction.</p>
+      </div>
+      <figure class="record-media" data-reveal>
+        <video id="captureClip" muted loop playsinline controls preload="none" poster="/media/camera-pair.jpg" aria-label="Original Main and Ultra Wide camera footage from the example recording"><source src="/media/capture-excerpt.mp4" type="video/mp4"></video>
+        <figcaption>Main and Ultra Wide · an excerpt from the actual recording.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="install-section wrap section-space" id="install" aria-labelledby="installTitle">
+    <div class="install-intro">
+      <h2 id="installTitle" data-reveal>Install on<br>your iPhone</h2>
+      <p data-reveal>Build Scene Capture from source and sign it with your own Apple Account. You’ll need a Mac, Xcode, an iPhone 17 Pro and a USB data cable.</p>
+      <a class="text-link" href="/downloads/iReal2Sim-0.3.0-source.zip" data-reveal>Download the source ZIP</a>
+      <div class="capture-stills" data-reveal><figure><img src="/media/main-camera.jpg" width="360" height="640" alt="Original Main camera view of the kitchen island" loading="lazy"><figcaption>Main camera</figcaption></figure><figure><img src="/media/ultra-camera.jpg" width="360" height="640" alt="Original Ultra Wide camera view showing more of the kitchen and surrounding room" loading="lazy"><figcaption>Ultra Wide</figcaption></figure></div>
+      <p class="support-note" data-reveal>The app checks both camera streams and depth rates before recording.</p>
+    </div>
+    <div class="install-instructions">
+      <ol class="install-steps">
+        <li data-reveal><h3>Open the Xcode project</h3><p>Unzip the source download and open <code>SceneCapture.xcodeproj</code>. Launch Xcode once to finish its setup and install iOS platform support if prompted.</p></li>
+        <li data-reveal><h3>Choose your signing team</h3><p>In <strong>Xcode → Settings → Accounts</strong>, add your Apple Account. Select the SceneCapture project, then the app target and <strong>Signing &amp; Capabilities</strong>. Enable automatic signing and choose your team. A free account appears as <strong>Personal Team</strong>.</p></li>
+        <li data-reveal><h3>Set a unique bundle ID</h3><p>Use an identifier of your own, such as <code>com.yourname.iReal2Sim</code>. Xcode will manage the development certificate and provisioning for that identity.</p></li>
+        <li data-reveal><h3>Pair and unlock your phone</h3><p>Connect the iPhone and complete the trust prompts. Select the physical phone beside the SceneCapture scheme. If requested, enable <strong>Settings → Privacy &amp; Security → Developer Mode</strong>, restart and confirm on the phone.</p></li>
+        <li data-reveal><h3>Build and record a short test</h3><p>Choose <strong>Product → Run</strong>. In the app, tap <strong>Prepare cameras</strong>, grant camera access and check the Main, Ultra Wide and depth indicators. Keep the app in the foreground and start with about 15 seconds.</p></li>
+        <li data-reveal><h3>Export the complete session</h3><p>Stop and wait for <strong>Complete</strong>. Copy the entire session folder to your Mac using the app, Files or Finder file sharing. Keep the folder intact for the pipeline.</p></li>
+      </ol>
+      <p class="apple-note">Free Personal Team provisioning expires after seven days; rebuild in Xcode to renew it. See <a href="https://developer.apple.com/help/account/basics/about-your-developer-account/">Apple’s account limits</a> and <a href="https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device">Developer Mode guide</a>.</p>
+    </div>
+  </section>
+
+  <section class="agent-section section-space" id="agent" aria-labelledby="agentTitle">
+    <div class="wrap agent-layout">
+      <div class="agent-copy">
+        <h2 id="agentTitle" data-reveal>Let your agent<br>run it</h2>
+        <p data-reveal>Open the unzipped source folder in Codex, Claude Code or another interactive coding agent. The repository’s <code>AGENTS.md</code> and local <code>ireal2sim</code> skill guide setup, credential checks, processing and resume.</p>
+        <p data-reveal>Give the agent the prompt alongside. It can locate your recording, run the ready stages and open your scene dashboard.</p>
+        <div class="setup-command" data-ui data-reveal><h3>Desktop dependencies</h3><pre><code>brew install uv ffmpeg cmake rtabmap
+uv sync --frozen --python 3.12</code></pre><p>Install <a href="https://brew.sh/">Homebrew</a> first if needed. Run these commands from the source folder, or ask your agent to set it up.</p></div>
+        <p class="support-note" data-reveal>Captures are processed on your Mac. Optional vision review sends camera storyboards to OpenAI and uses your API account. Keys belong in local configuration, never in this webpage or the iPhone app.</p>
+      </div>
+      <div class="agent-prompt" data-ui data-reveal>
+        <h3>Your first agent task</h3>
+        <label class="input-label" for="recordingPath">Exported session folder <span>optional</span></label>
+        <input id="recordingPath" type="text" placeholder="/path/to/your/session" autocomplete="off" spellcheck="false" aria-describedby="pathHint">
+        <p id="pathHint" class="field-hint">Leave blank to let the agent help you find it. This field stays in your browser.</p>
+        <fieldset class="profile-choice"><legend>Pipeline</legend><label><input type="radio" name="profile" value="scan" checked> Local scan</label><label><input type="radio" name="profile" value="review"> Scan + API review</label></fieldset>
+        <p class="review-notice" id="reviewNotice" hidden>Review uploads the Main and Ultra Wide storyboards to OpenAI and incurs API usage. The agent will ask you to configure an OpenAI key locally.</p>
+        <label for="agentPrompt" class="input-label">Copy into your agent</label>
+        <textarea id="agentPrompt" rows="7" readonly>Set up iReal2Sim and process my exported iPhone recording. Check dependencies and required credentials without printing values. Help me locate the complete session folder, run the local scan pipeline, and open the scene dashboard. Ask before optional API review. Keep unavailable fitting stages pending and show me the exact resume command.</textarea>
+        <div class="copy-row"><button type="button" class="button primary" id="copyPrompt">Copy agent prompt</button><span id="copyStatus" role="status" aria-live="polite"></span></div>
+        <noscript><p>Select the prompt above and copy it into your agent.</p></noscript>
+      </div>
+    </div>
+    <div class="wrap manual-route" data-reveal><h3>Prefer the dashboard?</h3><p>Run <code>./start</code> in the source folder. Open the local page, choose your exported session and click <strong>Build scene</strong>. You can add a vision-review key there when you opt in.</p></div>
+  </section>
+
+  <section class="scope-section wrap section-space" aria-labelledby="scopeTitle">
+    <div class="scope-heading"><h2 id="scopeTitle" data-reveal>What runs today</h2><p data-reveal>The example scene shows the direction of the project. Here’s what to expect when processing a new recording.</p><figure class="interaction-detail" data-reveal><img src="/media/interaction.png" width="900" height="600" alt="Estimated hand and bottle geometry compared with the captured kitchen during a recorded interaction" loading="lazy"><figcaption>Existing hand and bottle estimates, aligned to source frames.</figcaption></figure></div>
+    <div class="scope-details">
+      <dl class="capability-list">
+        <div data-reveal><dt>Scan and source replay</dt><dd>Built in: capture validation, both-camera indexing, calibrated Main/LiDAR RGB-D, RTAB-Map poses, Open3D fusion, optional textures and paired camera replay.</dd></div>
+        <div data-reveal><dt>Vision review</dt><dd>Optional OpenAI review proposes visible objects, surfaces and capture gaps. It produces an inventory to inspect against the original imagery.</dd></div>
+        <div data-reveal><dt>Scene and interaction fitting</dt><dd>Full scene models and learned hand/object fitting require configured workers and their dependencies. The agent keeps stages that need setup available for a later resume.</dd></div>
+        <div data-reveal><dt>The furnished demo</dt><dd>This demo includes authored structural and furniture refinements plus existing hand/bottle estimates. Hidden shape, dimensions, alignment and physical contact remain estimates.</dd></div>
+      </dl>
+      <details class="command-details" data-ui><summary>Command-line plan and resume</summary><pre><code>uv run scene-capture workflow plan /path/to/session \
+  --output workspaces/my-room --profile scan
+uv run scene-capture workflow run workspaces/my-room
+uv run scene-capture workflow status workspaces/my-room</code></pre><p>Repeat <code>workflow run</code> to resume valid completed stages. Use <code>--profile review</code> when you want API review, or <code>full</code> for configured scene, hand and object workers.</p></details>
+    </div>
+  </section>
+
+  <section class="closing-section section-space">
+    <div class="wrap closing-layout"><div><h2 data-reveal>Start with<br>your own room</h2><p data-reveal>Self-sign the capture app, export a session and let your agent guide the reconstruction.</p></div><div class="closing-links" data-reveal><a class="button light" href="/downloads/iReal2Sim-0.3.0-source.zip">Download source</a><a href="https://github.com/intelc/iReal2Sim" data-github>View the GitHub project</a><a href="/demo/">Open 3D demo</a></div></div>
+    <footer class="wrap site-footer"><p class="footer-name" aria-label="iReal2Sim">iReal2Sim</p><div class="footer-meta"><span>Built by <a href="https://intelchen.com/">Intel Chen</a> · Source under MIT</span><span>Inspired by <a href="https://xiaobenli00.github.io/scene-hands/">SceneHands</a> · iPhone 17 Pro + macOS</span></div></footer>
+  </section>
+</main>
+</body>
+</html>

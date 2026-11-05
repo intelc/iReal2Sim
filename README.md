@@ -3,6 +3,9 @@
 Capture a room on iPhone, then reconstruct and inspect it in a local dashboard.
 Includes a native Swift capture app and a reproducible desktop entry point.
 
+[Explore the 3D demo](https://ireal2sim.intelchen.com/demo/) or follow the
+[installation and agent guide](https://ireal2sim.intelchen.com/#install).
+
 **Install by self-signing with your own Apple Account.**
 Follow [Install on your iPhone](docs/self-signing.md).
 

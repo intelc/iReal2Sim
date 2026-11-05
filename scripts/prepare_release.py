@@ -11,6 +11,7 @@ import zipfile
 
 
 ROOTS=['release','release_server','agent_workflow','workflow_artifacts','export_rgbd','reconstruct','fuse_map','mesh_viewer','parse_recording','serve_viewer','astra_review','texture_atlas','map_replay']
+WEBSITE=['index.html','site.css','site.mjs','demo_defaults.mjs','mark.svg','README.md']
 ASSETS=['dashboard.css','setup.mjs','ui_logic.mjs','dashboard_page.mjs','viewer.css','viewer_ui.mjs','viewer.html','release_setup.html','map_viewer.mjs','map_geometry.mjs','map_navigation.mjs']
 TOP=['README.md','LICENSE','THIRD_PARTY.md','AGENTS.md','CLAUDE.md','.gitignore','.env.example','pyproject.toml','uv.lock','project.yml','start']
 DOCS=['self-signing.md','release-workflow.md','session-format.md']
@@ -37,6 +38,7 @@ def prepare(root,output):
     modules=import_closure(root,ROOTS)
     files=[Path(x)for x in TOP]+[Path('pipeline')/(x+'.py')for x in sorted(modules)]+[Path('pipeline/__init__.py')]
     files+=[Path('pipeline')/x for x in ASSETS]+[Path('pipeline/rtabmap/main.cpp'),Path('pipeline/rtabmap/CMakeLists.txt')]
+    files+=[Path('website')/x for x in WEBSITE]
     files+=[Path('docs')/x for x in DOCS]+[Path('tests')/x for x in TESTS]
     files+=[Path('tests/ios/RecordingTests.swift')]
     files+=[Path('scripts/install_iphone.py'),Path('scripts/prepare_release.py'),Path('.github/workflows/ci.yml')]
