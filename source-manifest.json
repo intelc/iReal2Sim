@@ -7,7 +7,7 @@
     ".agents/skills/ireal2sim/references/advanced-stages.md": "d01564f0e70a27d2db2283cab87af5b3d26b030f2d5ff226ccccfdc75c9d3b82",
     ".agents/skills/ireal2sim/references/credentials.md": "b204ebf86d7e5f5fe7558da851bf32e8fb71c6741e184905e46e607839c93c53",
     ".env.example": "8d63e7522a6509931764267541945147afd26b8adb14f1da83ebae92302ac0c0",
-    ".github/workflows/ci.yml": "cf02968bbf841c187a21c453e1bb9a5b6cb31c73948bea155a8c84e15620380a",
+    ".github/workflows/ci.yml": "feab01314c5fdaca17bd9b225fd19d741a46914db58bf2ef1ad2d7f6155d9432",
     ".gitignore": "ef6c6070ae9d5f49fc07be7bb87546aae280d3c4f4022b4878156ec041e6ed5c",
     "AGENTS.md": "1f65328cbc1e7c83f85d89fc2255acf1d79bfc384d8cc36324535c15886775cb",
     "CLAUDE.md": "afac9efa3554e56d7882fada95554d6397c777e27d7d1b8861449be0b4b47fe0",
