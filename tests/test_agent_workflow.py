@@ -29,6 +29,10 @@ class WorkflowTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup);self.root=Path(self.temp.name).resolve()
         self.source=self.root/'source';self.source.mkdir();(self.source/'manifest.json').write_text(json.dumps({'schema':'iphone-rsa.session/1','status':'complete'}))
         self.workspace=self.root/'workflow';self.worker=self.root/'worker.py';self.worker.write_text(WORKER)
+        # These tests replace reconstruction, so native mapping tools are simulated
+        # too. CI deliberately installs only FFmpeg for the actual video fixtures.
+        tools=patch('pipeline.agent_workflow.shutil.which',return_value='/fixture/tool')
+        tools.start();self.addCleanup(tools.stop)
 
     def fake_scan(self,source,output,**kwargs):
         output.mkdir(parents=True)
@@ -75,6 +79,13 @@ class WorkflowTests(unittest.TestCase):
     def test_changed_source_is_rejected_before_reusing_cache(self):
         init(self.source,self.workspace);(self.source/'new-file').write_text('new input')
         with self.assertRaisesRegex(ValueError,'Source recording changed'):run(self.workspace,{}, {})
+
+    def test_missing_native_tools_block_scan_without_attempting_processing(self):
+        init(self.source,self.workspace)
+        with patch('pipeline.agent_workflow.shutil.which',return_value=None),patch('pipeline.release.run')as scan:
+            state=run(self.workspace,{}, {})
+        self.assertFalse(scan.called);self.assertEqual(state['stages']['scan']['status'],'needs_setup')
+        self.assertEqual(state['stages']['scan']['attempts'],[])
 
     def test_corrupted_cached_output_creates_new_attempt_and_keeps_old(self):
         init(self.source,self.workspace)

@@ -64,7 +64,7 @@
     "scripts/prepare_release.py": "d2bf39a083d2002e5edc8a2e250142345c600cb122175aa2004388e9d7b58665",
     "start": "ab1f10a336e69cc7fad4d6671a6a1ebe0f2f1c11093a69ee1fb5cb3abf7e84fa",
     "tests/ios/RecordingTests.swift": "77269f600ce08c9954492426c100d7f610004a7c73d221ff3561314e4c18d405",
-    "tests/test_agent_workflow.py": "1a9513956d21c725f3530fbc8be28f461ab8dc5e851429cbbf4dbdaef134a6dd",
+    "tests/test_agent_workflow.py": "03d6d6ee7786175c5c0c07d1286a7d7d681d999f4b459f18a2f7c38dcb557220",
     "tests/test_gltf_material.py": "eac499b5ab8da934197e24afed1419e1fbeec4d2312ed74b971c26786c11e390",
     "tests/test_map_geometry.mjs": "c770b0e55256ae765d4014dfafbb87e9d5c950bb9a7263390746fad978b0001e",
     "tests/test_map_navigation.mjs": "44fb5fc12f457a975530e83d68f6f2472464ed92761019f24ff73e14c890057a",
